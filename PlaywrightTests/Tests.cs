@@ -81,8 +81,40 @@ public class Tests : PageTest
     //     await Expect(Page.Locator("h1")).ToContainTextAsync(successMsg);
     // }        
 
+    // [Test,Description("DropdownCheckboxesRadioButtonsPage")]
+    // public async Task DropdownMenuValues()
+    // {
+    //     var website = "https://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html";
+    //     string[] expectedLanguages = new string[] { "JAVA", "C#", "Python", "SQL" };
+    //     string[] programmingTools = new string[] { "Eclipse", "Maven", "TestNG", "JUnit" };
+    //     string[] programmingExtras = new string[] { "HTML", "CSS", "JavaScript", "JQuery" };
+
+    //     await Page.GotoAsync(website);
+    //     await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Dropdown Menu(s) | Checkboxe(s) | Radio Button(s)"));
+    //     await Page.Locator("#dropdowm-menu-1").SelectOptionAsync((expectedLanguages[1]).ToLower());
+    //     await Expect(Page.Locator("#dropdowm-menu-1")).ToContainTextAsync(expectedLanguages[1]);
+    //     await Page.Locator("#dropdowm-menu-1").SelectOptionAsync(expectedLanguages[2].ToLower());
+    //     await Expect(Page.Locator("#dropdowm-menu-1")).ToContainTextAsync(expectedLanguages[2]);
+    //     await Page.Locator("#dropdowm-menu-1").SelectOptionAsync(expectedLanguages[3].ToLower());
+    //     await Expect(Page.Locator("#dropdowm-menu-1")).ToContainTextAsync(expectedLanguages[3]);  
+    //     await Page.Locator("#dropdowm-menu-1").SelectOptionAsync(expectedLanguages[0].ToLower());
+    //     await Expect(Page.Locator("#dropdowm-menu-1")).ToContainTextAsync(expectedLanguages[0]);            
+
+    //     for (int i = 0; i < programmingTools.Length; i++)
+    //     {
+    //         await Page.Locator("#dropdowm-menu-2").SelectOptionAsync((programmingTools[i]).ToLower());
+    //         await Expect(Page.Locator("#dropdowm-menu-2")).ToContainTextAsync(programmingTools[i]);            
+    //     }
+
+    //     for (int i = 0; i < programmingExtras.Length; i++)
+    //     {
+    //         await Page.Locator("#dropdowm-menu-3").SelectOptionAsync((programmingExtras[i]).ToLower());
+    //         await Expect(Page.Locator("#dropdowm-menu-3")).ToContainTextAsync(programmingExtras[i]);            
+    //     }
+    // }
+
     [Test,Description("DropdownCheckboxesRadioButtonsPage")]
-    public async Task DropdownMenuValues()
+    public async Task CheckboxesMenuValues()
     {
         var website = "https://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html";
         string[] expectedLanguages = new string[] { "JAVA", "C#", "Python", "SQL" };
@@ -91,28 +123,22 @@ public class Tests : PageTest
 
         await Page.GotoAsync(website);
         await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Dropdown Menu(s) | Checkboxe(s) | Radio Button(s)"));
-        await Page.Locator("#dropdowm-menu-1").SelectOptionAsync((expectedLanguages[1]).ToLower());
-        await Expect(Page.Locator("#dropdowm-menu-1")).ToContainTextAsync(expectedLanguages[1]);
-        await Page.Locator("#dropdowm-menu-1").SelectOptionAsync(expectedLanguages[2].ToLower());
-        await Expect(Page.Locator("#dropdowm-menu-1")).ToContainTextAsync(expectedLanguages[2]);
-        await Page.Locator("#dropdowm-menu-1").SelectOptionAsync(expectedLanguages[3].ToLower());
-        await Expect(Page.Locator("#dropdowm-menu-1")).ToContainTextAsync(expectedLanguages[3]);  
-        await Page.Locator("#dropdowm-menu-1").SelectOptionAsync(expectedLanguages[0].ToLower());
-        await Expect(Page.Locator("#dropdowm-menu-1")).ToContainTextAsync(expectedLanguages[0]);            
-
-        for (int i = 0; i < programmingTools.Length; i++)
-        {
-            await Page.Locator("#dropdowm-menu-2").SelectOptionAsync((programmingTools[i]).ToLower());
-            await Expect(Page.Locator("#dropdowm-menu-2")).ToContainTextAsync(programmingTools[i]);            
-        }
-
         await Page.PauseAsync();
-        for (int i = 0; i < programmingExtras.Length; i++)
-        {
-            await Page.Locator("#dropdowm-menu-3").SelectOptionAsync((programmingExtras[i]).ToLower());
-            await Expect(Page.Locator("#dropdowm-menu-3")).ToContainTextAsync(programmingExtras[i]);            
-        }
+        await Page.GetByText("Option 1").SetCheckedAsync(true);
+        await Page.GetByText("Option 1").IsCheckedAsync();
+        await Page.GetByText("Option 2").SetCheckedAsync(true);
+        await Page.GetByText("Option 2").IsCheckedAsync();
+        await Page.GetByText("Option 3").SetCheckedAsync(true);
+        await Page.GetByText("Option 3").IsCheckedAsync();
+        await Page.GetByText("Option 4").SetCheckedAsync(true);
+        await Page.GetByText("Option 4").IsCheckedAsync();
+        await Page.GetByText("Option 2").SetCheckedAsync(false);
+        await Page.GetByText("Option 2").UncheckAsync();
+        await Page.GetByText("Option 4").SetCheckedAsync(false);
+        await Page.GetByText("Option 4").UncheckAsync();
     }
 }
 
 //dotnet test --settings .runsettings
+// await Page.PauseAsync();
+
