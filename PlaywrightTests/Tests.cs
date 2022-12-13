@@ -113,31 +113,46 @@ public class Tests : PageTest
     //     }
     // }
 
+    // [Test,Description("DropdownCheckboxesRadioButtonsPage")]
+    // public async Task CheckboxesMenuValues()
+    // {
+    //     var website = "https://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html";
+
+    //     await Page.GotoAsync(website);
+    //     await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Dropdown Menu(s) | Checkboxe(s) | Radio Button(s)"));
+    //     await Page.GetByText("Option 1").SetCheckedAsync(true);
+    //     await Page.GetByText("Option 1").IsCheckedAsync();
+    //     await Page.GetByText("Option 2").SetCheckedAsync(true);
+    //     await Page.GetByText("Option 2").IsCheckedAsync();
+    //     await Page.GetByText("Option 3").SetCheckedAsync(true);
+    //     await Page.GetByText("Option 3").IsCheckedAsync();
+    //     await Page.GetByText("Option 4").SetCheckedAsync(true);
+    //     await Page.GetByText("Option 4").IsCheckedAsync();
+    //     await Page.GetByText("Option 2").SetCheckedAsync(false);
+    //     await Page.GetByText("Option 2").UncheckAsync();
+    //     await Page.GetByText("Option 4").SetCheckedAsync(false);
+    //     await Page.GetByText("Option 4").UncheckAsync();
+    // }
+
     [Test,Description("DropdownCheckboxesRadioButtonsPage")]
-    public async Task CheckboxesMenuValues()
+    public async Task RadioButtonsMenuValues()
     {
         var website = "https://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html";
-        string[] expectedLanguages = new string[] { "JAVA", "C#", "Python", "SQL" };
-        string[] programmingTools = new string[] { "Eclipse", "Maven", "TestNG", "JUnit" };
-        string[] programmingExtras = new string[] { "HTML", "CSS", "JavaScript", "JQuery" };
+        string[] expectedColors = new string[] { "Green", "Blue", "Yellow", "Orange", "Purple" };
 
         await Page.GotoAsync(website);
         await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Dropdown Menu(s) | Checkboxe(s) | Radio Button(s)"));
         await Page.PauseAsync();
-        await Page.GetByText("Option 1").SetCheckedAsync(true);
-        await Page.GetByText("Option 1").IsCheckedAsync();
-        await Page.GetByText("Option 2").SetCheckedAsync(true);
-        await Page.GetByText("Option 2").IsCheckedAsync();
-        await Page.GetByText("Option 3").SetCheckedAsync(true);
-        await Page.GetByText("Option 3").IsCheckedAsync();
-        await Page.GetByText("Option 4").SetCheckedAsync(true);
-        await Page.GetByText("Option 4").IsCheckedAsync();
-        await Page.GetByText("Option 2").SetCheckedAsync(false);
-        await Page.GetByText("Option 2").UncheckAsync();
-        await Page.GetByText("Option 4").SetCheckedAsync(false);
-        await Page.GetByText("Option 4").UncheckAsync();
+
+        for (int i = 0; i < expectedColors.Length; i++)
+        {
+            await Page.PauseAsync();
+            await Page.CheckAsync(($"input[value='{expectedColors[i]}']").ToLower());
+            await Page.IsCheckedAsync(($"input[value='{expectedColors[i]}']"));
+            //await Expect(Page.Locator("#radio-buttons")).ToContainTextAsync(expectedColors[i]);            
+        }
     }
-}
+}    
 
 //dotnet test --settings .runsettings
 // await Page.PauseAsync();
