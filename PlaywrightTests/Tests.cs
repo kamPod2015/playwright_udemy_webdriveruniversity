@@ -148,8 +148,7 @@ public class Tests : PageTest
         {
             await Page.PauseAsync();
             await Page.CheckAsync(($"input[value='{expectedColors[i]}']").ToLower());
-            await Page.IsCheckedAsync(($"input[value='{expectedColors[i]}']"));
-            //await Expect(Page.Locator("#radio-buttons")).ToContainTextAsync(expectedColors[i]);            
+            await Page.IsCheckedAsync(($"input[value='{expectedColors[i]}']").ToLower());           
         }
     }
 }    
