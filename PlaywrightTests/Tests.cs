@@ -134,25 +134,65 @@ public class Tests : PageTest
     //     await Page.GetByText("Option 4").UncheckAsync();
     // }
 
-    [Test,Description("DropdownCheckboxesRadioButtonsPage")]
-    public async Task RadioButtonsMenuValues()
+    // [Test,Description("DropdownCheckboxesRadioButtonsPage")]
+    // public async Task RadioButtonsMenuValues()
+    // {
+    //     var website = "https://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html";
+    //     string[] expectedColors = new string[] { "Green", "Blue", "Yellow", "Orange", "Purple" };
+
+    //     await Page.GotoAsync(website);
+    //     await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Dropdown Menu(s) | Checkboxe(s) | Radio Button(s)"));
+
+    //     for (int i = 0; i < expectedColors.Length; i++)
+    //     {
+    //         await Page.CheckAsync(($"input[value='{expectedColors[i]}']").ToLower());
+    //         await Page.IsCheckedAsync(($"input[value='{expectedColors[i]}']").ToLower());           
+    //     }
+    // }
+
+    [Test,Description("DatepickerButtonsPage")]
+    public async Task SalectDateDatepickerTest()
     {
-        var website = "https://webdriveruniversity.com/Dropdown-Checkboxes-RadioButtons/index.html";
-        string[] expectedColors = new string[] { "Green", "Blue", "Yellow", "Orange", "Purple" };
+        var website = "https://webdriveruniversity.com/Datepicker/index.html";
+        DateTime basicDate = DateTime.Now;
+        var expectedTodayDate = basicDate.ToString("MM-dd-yyyy");
+        //var expectedTodayDate = "06-10-2020";
 
         await Page.GotoAsync(website);
-        await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Dropdown Menu(s) | Checkboxe(s) | Radio Button(s)"));
+        await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Datepicker"));
         await Page.PauseAsync();
+        
+        await Page.Locator(".form-control").ClickAsync();
+        await Page.Locator(".datepicker-days").IsVisibleAsync();
+        await Page.Locator(".datepicker-days>.datepicker-switch").ClickAsync();
+        await Page.Locator(".datepicker-months").IsVisibleAsync();
+        await Page.Locator(".datepicker-months>.datepicker-switch").ClickAsync();
+        await Page.Locator(".datepicker-years").IsVisibleAsync();
+        await Page.GetByRole(AriaRole.Cell, new() { NameString = "2020" }).ClickAsync();
+        await Page.Locator(".datepicker-months").IsVisibleAsync();
+        await Page.GetByRole(AriaRole.Cell, new() { NameString = "Jun" }).ClickAsync();
+        await Page.Locator(".datepicker-days").IsVisibleAsync();
+        await Page.GetByRole(AriaRole.Cell, new() { NameString = basicDate.Day.ToString() }).ClickAsync();
+        await Expect(Page.Locator(".form-control")).ToHaveValueAsync(expectedTodayDate); 
 
-        for (int i = 0; i < expectedColors.Length; i++)
-        {
-            await Page.PauseAsync();
-            await Page.CheckAsync(($"input[value='{expectedColors[i]}']").ToLower());
-            await Page.IsCheckedAsync(($"input[value='{expectedColors[i]}']").ToLower());           
-        }
     }
 }    
 
 //dotnet test --settings .runsettings
 // await Page.PauseAsync();
 
+// Zakładamy repo na  githubie
+// Ściągamy niezbędne rzeczy, zakładamy projekt i instalujemy Cypressa
+// Automatyzujemy stronę Contact US  
+// Uzupełniamy wszystkie dane, i resetujemy - weryfikujemy czy wyczyściło poprawnie
+// Wprowadzamy cześć danych i próbujemy wysłać - sprawdzamy komunikat błędu
+// Wprowadzamy błędny email i sprawdzamy komunikat
+// Wprowadzamy wszystkie dane i sprawdzamy komunikat
+// Automatyzujemy stronę Dropdown Menu(s), Checkboxe(s) & Radio Button(s)
+// Wybieramy wszystkie możliwe opcje z dropdownow i sprawdzamy ich wartości czy są poprawne
+// Zaznaczamy wszystkie checkboxy a następnie odznaczamy 2 i 4 - sprawdzamy czy  zostały odznaczone i zaznaczone poprawnie
+// Klikamy wszystkie Radio buttony po każdym kliknięciu sprawdzamy czy zaznaczył się ten który chcieliśmy
+
+// Automatyzujemy stronę Datepicker - wpisujemy date i sprawdzamy czy została wybrana poprawna
+// Automatyzujemy stronę Autocomplete TextField - wpisujemy 3 pierwsze znaki i wybieramy 2 element z listy podpowiadanej np. ('chi')
+// Automatyzujemy stronę Ajax-Loader - czekamy aż strona się załaduje(bez statycznych waitow) i klikamy guzik
