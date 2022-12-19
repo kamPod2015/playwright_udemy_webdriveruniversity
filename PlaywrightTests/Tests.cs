@@ -150,29 +150,47 @@ public class Tests : PageTest
     //     }
     // }
 
-    [Test,Description("DatepickerButtonsPage")]
-    public async Task SalectDateDatepickerTest()
+    // [Test,Description("DatepickerButtonsPage")]
+    // public async Task SalectDateDatepickerTest()
+    // {
+    //     var website = "https://webdriveruniversity.com/Datepicker/index.html";
+    //     DateTime basicDate = DateTime.Now;
+    //     var expectedDate = "01-01-2020";
+
+    //     await Page.GotoAsync(website);
+    //     await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Datepicker"));
+        
+    //     await Page.Locator(".form-control").ClickAsync();
+    //     await Page.Locator(".datepicker-days").IsVisibleAsync();
+    //     await Page.GetByRole(AriaRole.Cell, new() { NameString = "December 2022" }).ClickAsync();
+    //     await Page.Locator(".datepicker-months").IsVisibleAsync();
+    //     await Page.GetByRole(AriaRole.Cell, new() { NameString = "2022" }).ClickAsync();
+    //     await Page.Locator(".datepicker-years").IsVisibleAsync();
+    //     await Page.GetByRole(AriaRole.Cell, new() { NameString = "2019 2020 2021 2022 2023 2024 2025 2026 2027 2028 2029 2030" }).GetByText("2020").ClickAsync();
+    //     await Page.Locator(".datepicker-months").IsVisibleAsync();
+    //     await Page.GetByText("Jan").ClickAsync();
+    //     await Page.Locator(".datepicker-days").IsVisibleAsync();
+    //     await Page.GetByRole(AriaRole.Row, new() { NameString = "29 30 31 1 2 3 4" }).GetByRole(AriaRole.Cell, new() { NameString = "1" }).Nth(1).ClickAsync();
+    //     await Page.Locator("#datepicker").IsVisibleAsync();
+    //     await Expect(Page.Locator(".form-control")).ToHaveValueAsync(expectedDate);
+    // }
+
+    [Test,Description("AutocompleteTextFieldPage")]
+    public async Task AutocompleteTextFieldTest()
     {
-        var website = "https://webdriveruniversity.com/Datepicker/index.html";
+        var website = "https://webdriveruniversity.com/Autocomplete-TextField/autocomplete-textfield.html";
         DateTime basicDate = DateTime.Now;
-        var expectedDate = "01-01-2020";
 
         await Page.GotoAsync(website);
-        await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Datepicker"));
+        await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Contact Us"));
         
-        await Page.Locator(".form-control").ClickAsync();
-        await Page.Locator(".datepicker-days").IsVisibleAsync();
-        await Page.GetByRole(AriaRole.Cell, new() { NameString = "December 2022" }).ClickAsync();
-        await Page.Locator(".datepicker-months").IsVisibleAsync();
-        await Page.GetByRole(AriaRole.Cell, new() { NameString = "2022" }).ClickAsync();
-        await Page.Locator(".datepicker-years").IsVisibleAsync();
-        await Page.GetByRole(AriaRole.Cell, new() { NameString = "2019 2020 2021 2022 2023 2024 2025 2026 2027 2028 2029 2030" }).GetByText("2020").ClickAsync();
-        await Page.Locator(".datepicker-months").IsVisibleAsync();
-        await Page.GetByText("Jan").ClickAsync();
-        await Page.Locator(".datepicker-days").IsVisibleAsync();
-        await Page.GetByRole(AriaRole.Row, new() { NameString = "29 30 31 1 2 3 4" }).GetByRole(AriaRole.Cell, new() { NameString = "1" }).Nth(1).ClickAsync();
-        await Page.Locator("#datepicker").IsVisibleAsync();
-        await Expect(Page.Locator(".form-control")).ToHaveValueAsync(expectedDate);
+        await Page.Locator("#myInput").ClickAsync();
+        await Page.PauseAsync();
+        await Page.Locator("#myInput").FillAsync("mil");
+        await Page.Locator("#myInputautocomplete-list").IsVisibleAsync();
+        var expectedProduct = await Page.Locator("#myInputautocomplete-list > div:nth-child(2)").TextContentAsync();
+        await Page.Locator("#myInputautocomplete-list > div:nth-child(2)").ClickAsync();
+        await Expect(Page.Locator("#myInput")).ToHaveValueAsync(expectedProduct);
     }
 }    
 
@@ -191,6 +209,6 @@ public class Tests : PageTest
 // Zaznaczamy wszystkie checkboxy a następnie odznaczamy 2 i 4 - sprawdzamy czy  zostały odznaczone i zaznaczone poprawnie
 // Klikamy wszystkie Radio buttony po każdym kliknięciu sprawdzamy czy zaznaczył się ten który chcieliśmy
 // Automatyzujemy stronę Datepicker - wpisujemy date i sprawdzamy czy została wybrana poprawna
-
 // Automatyzujemy stronę Autocomplete TextField - wpisujemy 3 pierwsze znaki i wybieramy 2 element z listy podpowiadanej np. ('chi')
+
 // Automatyzujemy stronę Ajax-Loader - czekamy aż strona się załaduje(bez statycznych waitow) i klikamy guzik
