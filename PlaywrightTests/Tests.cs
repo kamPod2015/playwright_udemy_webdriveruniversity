@@ -175,22 +175,35 @@ public class Tests : PageTest
     //     await Expect(Page.Locator(".form-control")).ToHaveValueAsync(expectedDate);
     // }
 
-    [Test,Description("AutocompleteTextFieldPage")]
+    // [Test,Description("AutocompleteTextFieldPage")]
+    // public async Task AutocompleteTextFieldTest()
+    // {
+    //     var website = "https://webdriveruniversity.com/Autocomplete-TextField/autocomplete-textfield.html";
+    //     DateTime basicDate = DateTime.Now;
+
+    //     await Page.GotoAsync(website);
+    //     await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Contact Us"));
+        
+    //     await Page.Locator("#myInput").ClickAsync();
+    //     await Page.PauseAsync();
+    //     await Page.Locator("#myInput").FillAsync("mil");
+    //     await Page.Locator("#myInputautocomplete-list").IsVisibleAsync();
+    //     var expectedProduct = await Page.Locator("#myInputautocomplete-list > div:nth-child(2)").TextContentAsync();
+    //     await Page.Locator("#myInputautocomplete-list > div:nth-child(2)").ClickAsync();
+    //     await Expect(Page.Locator("#myInput")).ToHaveValueAsync(expectedProduct);
+    // }
+
+    [Test,Description("AjaxLoaderPage")]
     public async Task AutocompleteTextFieldTest()
     {
-        var website = "https://webdriveruniversity.com/Autocomplete-TextField/autocomplete-textfield.html";
+        var website = "https://webdriveruniversity.com/Ajax-Loader/index.html";
         DateTime basicDate = DateTime.Now;
 
         await Page.GotoAsync(website);
-        await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Contact Us"));
-        
-        await Page.Locator("#myInput").ClickAsync();
-        await Page.PauseAsync();
-        await Page.Locator("#myInput").FillAsync("mil");
-        await Page.Locator("#myInputautocomplete-list").IsVisibleAsync();
-        var expectedProduct = await Page.Locator("#myInputautocomplete-list > div:nth-child(2)").TextContentAsync();
-        await Page.Locator("#myInputautocomplete-list > div:nth-child(2)").ClickAsync();
-        await Expect(Page.Locator("#myInput")).ToHaveValueAsync(expectedProduct);
+        await Expect(Page).ToHaveTitleAsync(new Regex("WebDriver | Ajax-Loader"));
+        await Page.Locator("#button1").IsVisibleAsync();
+        await Page.Locator("#button1").ClickAsync();
+        await Page.Locator("#myModalClick").IsVisibleAsync();
     }
 }    
 
@@ -210,5 +223,4 @@ public class Tests : PageTest
 // Klikamy wszystkie Radio buttony po każdym kliknięciu sprawdzamy czy zaznaczył się ten który chcieliśmy
 // Automatyzujemy stronę Datepicker - wpisujemy date i sprawdzamy czy została wybrana poprawna
 // Automatyzujemy stronę Autocomplete TextField - wpisujemy 3 pierwsze znaki i wybieramy 2 element z listy podpowiadanej np. ('chi')
-
 // Automatyzujemy stronę Ajax-Loader - czekamy aż strona się załaduje(bez statycznych waitow) i klikamy guzik
